@@ -1,8 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma'
-import { parse } from 'path'
-import { request } from 'http'
 
 export async function memoriesRoutes(app: FastifyInstance) {
   app.get('/memories', async () => {
@@ -69,7 +67,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
 
     const { content, coverUrl, isPublic } = bodySchema.parse(request.body)
 
-    const memory = await primsa.memory.update({
+    const memory = await prisma.memory.update({
       where: { id },
       data: { content, coverUrl, isPublic },
     })
